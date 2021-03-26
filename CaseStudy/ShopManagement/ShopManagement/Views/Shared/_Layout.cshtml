@@ -1,0 +1,141 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+<!DOCTYPE html>
+@inject SignInManager<AppIdentityUser> SigninManager
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FootBall Shop</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/shop-homepage.css" rel="stylesheet">
+    <link href="~/css/shop-item.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/LoginLibaries/css/style.css" />
+    <link rel="stylesheet" href="~/FooterCss/Footer.css" />
+
+
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="home" asp-action="index"><img src="~/images/Logo.png" width="100" height="40" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="home" asp-action="index">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>                  
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (SigninManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="logout">Logout @User.Identity.Name</a>                          
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="login">Login</a>
+                        </li>
+                    }
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="cart" asp-action="cart">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        @await Html.PartialAsync("_CartPartial")
+                    </a>
+                    
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <!-- Footer -->
+
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3 style="color:white">Liên Hệ</h3>
+                        <ul>
+                            <li><a href="https://www.google.com/maps/place/24+Nguy%E1%BB%85n+Tri+Ph%C6%B0%C6%A1ng,+Ph%C3%BA+H%E1%BB%99i,+Th%C3%A0nh+ph%E1%BB%91+Hu%E1%BA%BF,+Th%E1%BB%ABa+Thi%C3%AAn+Hu%E1%BA%BF/16.4645092,107.5899511,17z/data=!3m1!4b1!4m5!3m4!1s0x3141a13c011c44c3:0xfe77a773d0eabfde!8m2!3d16.4645092!4d107.5921398?hl=vi-VN">Địa Chỉ:24  Nguyễn Tri Phương, Phường Phú Hội, TP-Huế</a></li>
+                            <li><a href="#">Email:FootballShop@gmail.com</a></li>
+                            <li><a href="#">Số Điện Thoại:192056514</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3 style="color:white">CHÍNH SÁCH</h3>
+                        <ul>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">Chính sách thanh toán</a></li>
+                            <li><a href="#">Chính sách vận chuyển </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3 style="color:white">FootBall Shop</h3>
+                        <p>FootBall Shop với thời gian hoạt động gần 10 năm trong lĩnh vực quần áo bóng đá thiết kế, áo đồng phục, công ty, áo lớp đã và đang đem đến cho khách hàng những trải nghiệm tốt nhất từ dịch vụ, chất lượng đến giá thành sản phẩm..</p>
+                    </div>
+                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                </div>
+                <p class="copyright">FootBall Shop © 2021</p>
+            </div>
+        </footer>
+    </div>
+
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    @if (IsSectionDefined("Login"))
+    {
+        @RenderSection("Login", required: false)
+    }
+
+
+    @if (IsSectionDefined("Scriptsss"))
+    {
+        @RenderSection("Scriptsss", required: false)
+    }
+
+
+</body>
+</html>
+
+
+
+
+
+
+

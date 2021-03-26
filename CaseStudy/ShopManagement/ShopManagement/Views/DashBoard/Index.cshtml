@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Category>
+
+@{
+    Layout = "~/Views/Shared/_LayoutDashBoard.cshtml";
+    ViewBag.Title = "Employee Details";
+}
+
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Data Table</strong>
+                    <div class="card-title"><a asp-controller="Product" asp-action="AllProducts">All Product</a></div>
+                    <div class="card-title"><a asp-controller="DashBoard" asp-action="CreateCategory">New Category</a></div>
+                </div>
+                
+                <div class="card-body">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name Category</th>
+                                <th>Total Amount Product</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CategoryId</td>
+                                <td>@item.Name</td>
+                                <td>
+                                 @item.products.Count
+                                </td>
+                                <td>
+                                    <a class="btn btn-success" asp-controller="Product" asp-action="DetailProductByCategory" asp-route-id="@item.CategoryId">Detail</a>                                   
+                                </td>
+                            </tr>
+                        }
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

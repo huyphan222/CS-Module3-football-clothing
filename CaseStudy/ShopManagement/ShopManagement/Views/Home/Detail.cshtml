@@ -1,0 +1,24 @@
+﻿@model HomeDetailsViewModel
+
+@{
+    ViewBag.Title = "Product Detail";
+    var photoPath = "~/images/" + (Model.GetProduct.Photo ?? "Default.png");
+}
+
+<div class="col-lg-9">
+
+    <div class="card mt-4">
+        <img class="card-img-top img-fluid" src="@photoPath" asp-append-version="true" alt="">
+        <div class="card-body">
+            <h3 class="card-title">@Model.GetProduct.Name</h3>
+            <h4> Price: @Model.GetProduct.Price</h4>
+            <h4>Size Available: @Model.GetProduct.Size</h4>
+            <p class="card-text">
+               @Model.GetProduct.Description
+            </p>         
+        </div>
+        <div class="card-footer">
+            <a  asp-controller="Cart" asp-action="AddToCart" asp-route-ProductId="@Model.GetProduct.ProductId" class="btn btn-success" >Add to cart</a>
+        </div>
+    </div>
+</div>

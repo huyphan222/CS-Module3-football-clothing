@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Product>
+
+
+@{
+    Layout = "_LayoutDashBoard";
+
+}
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Data Table</strong>
+                       <a asp-controller="Product" asp-action="CreateProduct" class="btn btn-success">New Product</a>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id Category</th>
+                                    <th>Id Product</th>
+                                    <th>Product Name</th>
+                                    <th>Image </th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model)
+                                {
+                                    var photoPath = "~/images/" + (product.Photo ?? "contact-img.jpg");
+                                    <tr>
+                                        <td>@product.CategoryId</td>
+                                        <td>@product.ProductId</td>
+                                        <td>@product.Name</td>
+                                        <td><img src="@photoPath" asp-append-version="true" style="height:50px;width:50px;" /></td>
+                                        <td>@product.Price</td>
+                                        <td>
+                                            <div class="btn btn-success">
+                                                <a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@product.ProductId" style="color:white">Detail</a>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+@section DataTable {
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/datatables.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/jszip.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/vfs_fonts.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/buttons.html5.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/buttons.print.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+
+    <script src="~/DashBoardLibraries/assets/js/init/datatables-init.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
+}

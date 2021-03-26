@@ -1,0 +1,56 @@
+﻿@model CreateCategoryViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutDashBoard.cshtml";
+    ViewBag.Title = "Employee Details";
+}
+
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Data Table</strong>
+                    <div class="card-title"><a asp-controller="DashBoard" asp-action="AllProducts">All Product</a></div>
+                    @*<div class="card-title"><a asp-controller="DashBoard" asp-action="CreateCategory">New Category</a></div>*@
+                    <div class="card-title">
+                        <form enctype="multipart/form-data" asp-controller="DashBoard" asp-action="CreateCategory">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" placeholder="Name" />
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a asp-controller="DashBoard" asp-action="Index" class="btn btn-danger">Cancel</a><br />
+                            <span asp-validation-for="Name"></span>
+                        </form>
+                        
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name Category</th>
+                                <th>Total Amount Product</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Categories)
+                            {
+                                <tr>
+                                    <td>@item.CategoryId</td>
+                                    <td>@item.Name</td>
+                                    <td>
+                                        @item.products.Count
+                                    </td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

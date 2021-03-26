@@ -1,0 +1,36 @@
+﻿@model ProductDetailViewModel
+
+@{
+
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "Product Detail";
+    var photoPath = "~/images/" + (Model.Product.Photo ?? "AoChelsea2020.png");
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Product.Name</h1>
+            </div>
+
+            <div class="card-body text-center">
+                <img class="card-img-top " src="@photoPath" width="120" height="300" asp-append-version="true">
+                <h4>ProductId: @Model.Product.ProductId</h4>
+                <h4>Product Price: @Model.Product.Price</h4>
+                <h4>Product Size: @Model.Product.Size</h4>
+            </div>
+
+            <div class="card-footer text-center">
+                <a asp-controller="Product" asp-action="AllProducts" class="btn btn-primary">Back</a>
+                <a class="btn btn-primary"
+                   asp-controller="Product" asp-action="EditProduct" asp-route-id="@Model.Product.ProductId"> Edit</a>
+                <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@Model.Product.ProductId" class="btn btn-danger">Delete </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
